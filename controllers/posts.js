@@ -16,11 +16,9 @@ export const createPost = async(req,res) =>{
     console.log('creating ....')
     const reqBody =req.body;
     try {
-        // const savedPost = await postData.save()
         const postData = new PostsModel(reqBody)
-        await postData.save()
-    
-        res.status(201).json(postData)
+        const created = await postData.save();
+        res.status(201).json(created)
     } catch (error) {
         res.status(404).json({message: error.message})
     }
@@ -29,8 +27,9 @@ export const createPost = async(req,res) =>{
 export const updatePost = async(req,res) => {
     console.log('updating ......')
     try {
+        const { id } = req.params;
         const npost = req.body;
-        await PostsModel.findByIdAndUpdate(npost._id, npost)
+        await PostsModel.findByIdAndUpdate(id, npost)
         res.status(201).json(npost)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -41,9 +40,21 @@ export const deletePost = async(req, res) => {
     console.log('deleting .......')
     try {
         const {id} = req.params;
-        const deleted = await PostsModel.findOneAndRemove(id)
+        const deleted = await PostsModel.findByIdAndRemove(id)
         res.status(200).json(deleted)
     } catch (error) {
         console.log(error)
     }
 }
+
+// export const likePost = async (req, res) => {
+//     console.log('liking ......');
+//     try {
+//         const { id } = req.params;
+//         const npost = req.body;
+//         const likedPost = await updatePost(id, npost);
+//         res.status(201).json(likedPost);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };

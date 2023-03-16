@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema({
     creator: String,
     title:String,
-    body:String,
-    pic: String,
+    body: String,
     tags: [],
     likes: {
         type: Number,
@@ -13,7 +12,8 @@ const postSchema = mongoose.Schema({
     date: {
         type:Date,
         default: new Date()
-    }
+    },
+    pic: String,
 });
 
 const PostsModel = mongoose.model('posts', postSchema)
