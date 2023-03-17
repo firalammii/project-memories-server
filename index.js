@@ -13,8 +13,8 @@ app.use(cors());
 
 app.use('/posts', routerPosts)
 
-// const DB_CONNECTION_URI = 'mongodb+srv://firalammy:7ONMtuZOuf5fMlWl@cluster0.n8gmagp.mongodb.net/?retryWrites=true&w=majority';
-const DB_CONNECTION_URI = 'mongodb://localhost/memories_project'
+const DB_CONNECTION_URI = 'mongodb+srv://firalammy:7ONMtuZOuf5fMlWl@cluster0.n8gmagp.mongodb.net/?retryWrites=true&w=majority';
+// const DB_CONNECTION_URI = 'mongodb://localhost/memories_project'
 
 const PORT = process.env.PORT || 3000;
 
