@@ -8,7 +8,7 @@ export const fetchPosts = async(req, res) =>{
         res.status(200).json(posts);
     } catch (error) {
         console.log(error.message)
-        res.status(400).json({message: error.message})
+        res.status(400).json(error)
     }
 }
 
@@ -20,7 +20,7 @@ export const createPost = async(req,res) =>{
         const created = await postData.save();
         res.status(201).json(created)
     } catch (error) {
-        res.status(404).json({message: error.message})
+        res.status(404).json(error)
     }
 }
 
@@ -32,7 +32,7 @@ export const updatePost = async(req,res) => {
         await PostsModel.findByIdAndUpdate(id, npost)
         res.status(201).json(npost)
     } catch (error) {
-        res.status(404).json({ message: error.message })
+        res.status(404).json(error)
     }
 }
 
