@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
 
 app.use('/posts', routerPosts)
 
-// const DB_CONNECTION_URI = 'mongodb://localhost/memories_project'
-
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.DB_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
