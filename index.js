@@ -14,13 +14,18 @@ app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send("Hello World this a memories project API");
+    res.send("This a memories project API");
 })
 
 app.use('/posts', routerPosts)
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.DB_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() =>app.listen(PORT, () => console.log(`succesfull connection to db PORT ${PORT} ....`)))
+// mongoose.connect(process.env.DB_CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => app.listen(PORT, () => console.log(`connected to db, server on PORT ${PORT} ....`)))
+// .catch(err => console.log( err +'\nunable to connect'))
+
+
+mongoose.connect(process.env.DB_CONNECTION_URI_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => app.listen(PORT, () => console.log(`connected to db, server on localhost ${PORT}`)))
 .catch(err => console.log( err +'\nunable to connect'))
