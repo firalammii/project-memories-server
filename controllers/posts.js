@@ -1,10 +1,10 @@
 import PostsModel from "../models/posts-model.js"
 
 export const fetchPosts = async(req, res) =>{
-    console.log('fetching  ....')
+    console.log('fetching posts...')
 
     try {
-        const posts = await PostsModel.find();
+        const posts = await PostsModel.find({});
         res.status(200).json(posts);
     } catch (error) {
         console.log(error.message)
@@ -13,8 +13,8 @@ export const fetchPosts = async(req, res) =>{
 }
 
 export const createPost = async(req,res) =>{
-    console.log('creating ....')
-    const reqBody =req.body;
+    console.log('creating post...');
+    const reqBody = req.body;
     try {
         const postData = new PostsModel(reqBody)
         const created = await postData.save();
@@ -25,7 +25,7 @@ export const createPost = async(req,res) =>{
 }
 
 export const updatePost = async(req,res) => {
-    console.log('updating ......')
+    console.log('updating post...')
     try {
         const { id } = req.params;
         const npost = req.body;
@@ -37,7 +37,7 @@ export const updatePost = async(req,res) => {
 }
 
 export const deletePost = async(req, res) => {
-    console.log('deleting .......')
+    console.log('deleting post...')
     try {
         const {id} = req.params;
         const deleted = await PostsModel.findByIdAndRemove(id)
