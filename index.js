@@ -4,7 +4,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 
-import routerPosts from './routes/posts.js'
+import postsRouter from './routes/posts.js';
+import usersRouter from './routes/users.js'
 
 const app = express();
 dotenv.config();
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
     res.send("This a memories project API");
 })
 
-app.use('/posts', routerPosts)
+app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
 
 const PORT = process.env.PORT || 3000;
 
@@ -28,4 +30,4 @@ mongoose.connect(process.env.DB_CONNECTION_URI, { useNewUrlParser: true, useUnif
 
 // mongoose.connect(process.env.DB_CONNECTION_URI_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true })
 //     .then(() => app.listen(PORT, () => console.log(`connected to local db, server on localhost ${PORT}`)))
-// .catch(err => console.log( err +'\nunable to connect'))
+//     .catch(err => console.log(err + '\nunable to connect'));

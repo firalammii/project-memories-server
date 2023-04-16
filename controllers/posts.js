@@ -2,9 +2,8 @@ import PostsModel from "../models/posts-model.js"
 
 export const fetchPosts = async(req, res) =>{
     console.log('fetching posts...')
-
     try {
-        const posts = await PostsModel.find({});
+        const posts = await PostsModel.find({}).populate('users');
         res.status(200).json(posts);
     } catch (error) {
         console.log(error.message)
@@ -14,9 +13,8 @@ export const fetchPosts = async(req, res) =>{
 
 export const createPost = async(req,res) =>{
     console.log('creating post...');
-    const reqBody = req.body;
     try {
-        const postData = new PostsModel(reqBody)
+        const postData = new PostsModel(req.body)
         const created = await postData.save();
         res.status(201).json(created)
     } catch (error) {
@@ -28,9 +26,8 @@ export const updatePost = async(req,res) => {
     console.log('updating post...')
     try {
         const { id } = req.params;
-        const npost = req.body;
-        await PostsModel.findByIdAndUpdate(id, npost)
-        res.status(201).json(npost)
+        const updated = await PostsModel.findByIdAndUpdate(id, req.body).populate('users');
+        res.status(201).json(req.body)
     } catch (error) {
         res.status(404).json(error)
     }
@@ -45,16 +42,4 @@ export const deletePost = async(req, res) => {
     } catch (error) {
         console.log(error)
     }
-}
-
-// export const likePost = async (req, res) => {
-//     console.log('liking ......');
-//     try {
-//         const { id } = req.params;
-//         const npost = req.body;
-//         const likedPost = await updatePost(id, npost);
-//         res.status(201).json(likedPost);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+};

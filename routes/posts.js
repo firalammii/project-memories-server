@@ -4,11 +4,9 @@ import { fetchPosts, createPost, updatePost, deletePost } from "../controllers/p
 
 const router = express.Router()
 
-router.get('/fetch', fetchPosts);
-router.post('/post', createPost);
+router.get('/posts', fetchPosts);
+router.post('/create', createPost);
 router.put('/update/:id', updatePost);
 router.delete('/delete/:id', deletePost)
-
-// router.put('/like/:id', likePost)
 
 export default router;
