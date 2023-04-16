@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send("This a memories project API");
+    res.send("This is memories project API");
 })
 
 app.use('/posts', postsRouter);

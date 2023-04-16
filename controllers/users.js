@@ -3,7 +3,7 @@ import UsersModel from "../models/users-model.js";
 export const fetchUsers = async (req, res) => {
     console.log('fetching users...');
     try {
-        const users = await UsersModel.find({}).populate('posts');
+        const users = await UsersModel.find({});
         res.status(200).json(users);
     } catch (error) {
         console.log(error.message);
@@ -26,21 +26,7 @@ export const updateUser = async (req, res) => {
     console.log('updating user...');
     try {
         const { id } = req.params;
-        const updated = await UsersModel.findByIdAndUpdate(id, req.body).populate('posts');
-        res.status(201).json(updated);
-    } catch (error) {
-        res.status(404).json(error);
-    }
-};
-
-export const addUserPost = async (req, res) => {
-    console.log('adding user post...');
-    try {
-        const { id } = req.params;
-        const user = await UsersModel.findById(id);
-        const nuser = { ...user, posts: [req.body, ...user.posts] };
-
-        const updated = await UsersModel.findByIdAndUpdate(id, nuser).populate('posts');
+        const updated = await UsersModel.findByIdAndUpdate(id, req.body);
         res.status(201).json(updated);
     } catch (error) {
         res.status(404).json(error);
